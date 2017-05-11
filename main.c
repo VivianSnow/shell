@@ -7,8 +7,16 @@
 #include <limits.h>
 #include <wordexp.h>
 #include <sys/fcntl.h>
+#include <errno.h>
 
 #define MAXLINE (1024)
+
+#define ECHOSYM(sym)         \
+    do{                      \
+        printf("%c ", sym);   \
+    }while(0)
+
+#define DEFAULTSYM ('>')
 
 
 /*Have big difference with O_ACCMODE in _default_fcntl.h */
@@ -132,14 +140,14 @@ int main(int argc, char *argv[])
     pid_t pid;
     int status;
 
-    printf("%% ");
+    ECHOSYM('%');
     while (fgets(cmd, MAXLINE, stdin) != NULL) {
         if (cmd[strlen(cmd) - 1] == '\n') {
             cmd[strlen(cmd) - 1] = '\0';
         }
         while (cmd[strlen(cmd) - 1] == '\\') {
             //fflush(stdout);
-            printf("> ");
+            ECHOSYM('>');
             cmd[strlen(cmd) - 1] = '\0';
             if(fgets(cmd_cont, MAXLINE, stdin) != NULL) {
                 if (cmd_cont[strlen(cmd_cont) - 1] == '\n') {
@@ -151,8 +159,6 @@ int main(int argc, char *argv[])
             }
         }
 
-
-        //Todo: Using Finite-state machine spilit
         puts(cmd);
 
 
@@ -187,8 +193,12 @@ int main(int argc, char *argv[])
                     perror("Dup error");
                 }
             }
-            execvp(p.we_wordv[0], p.we_wordv);
-            wordfree(&p);
+
+            if(execvp(p.we_wordv[0], p.we_wordv) < 0){}
+            {
+                fprintf(stderr, "shell: %s : %s\n", p.we_wordv[0], strerror(errno));
+            }
+            wordfree(&p); //don't forget to free p when exec failed
             exit(127);
         }
 
