@@ -1,0 +1,204 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
+\usepackage[unicode=true]{hyperref}
+\hypersetup{
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\date{}
+
+\begin{document}
+
+\section{测试报告}\label{header-c5}
+
+\begin{quote}
+编写日期:2017年6月7日
+
+编写人:VivianSnow
+\end{quote}
+
+\subsection{功能测试}\label{header-c12}
+
+\subsubsection{要求功能测试}\label{header-c13}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item ~
+  \paragraph{改变命令提示符测试}\label{header-c16}
+\end{enumerate}
+
+\begin{verbatim}
+  测试目的:验证是否能够通过改变PROMPT变量达到改变shell的输入提示符
+\end{verbatim}
+
+\begin{verbatim}
+  测试方案:在`ezsh`中输入
+\end{verbatim}
+
+\begin{verbatim}
+  ```shell
+  shell>export PROMPT = "VivianSnow's Shell>"
+  ```
+
+  预测结果:`ezsh`的输入提示符改为VivianSnow's Shell>
+
+  测试结果:与预期一致
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item ~
+  \paragraph{关闭程序测试}\label{header-c24}
+
+  测试目的:验证是否能够通过改变PROMPT变量达到改变shell的输入提示符
+
+  测试方案:
+
+  \begin{itemize}
+  \item
+    在\texttt{ezsh}中输入exit命令退出
+  \item
+    尝试\^{}C和\^{}D等是否能够正常的控制\texttt{ezsh}
+  \end{itemize}
+
+  预测结果:输入exit和\^{}D能够退出\texttt{ezsh},使用\^{}C\texttt{ezsh}无响应
+
+  测试结果:与预期一致
+\item ~
+  \paragraph{后台机制测试}\label{header-c41}
+
+  测试目的:验证后台指示符\texttt{\&}和\texttt{jobs}、\texttt{fg}、\texttt{bg}内置命令能否正常使用
+
+  测试方案:
+
+  \begin{itemize}
+  \item
+    在\texttt{ezsh}中输入几个命令，并配合使用后台指示符\texttt{\&}，查看\texttt{ezsh}
+    能否正常的前台后台执行命令
+  \item
+    使用\texttt{jobs}内置命令查看当前活跃任务的序号和状态
+  \item
+    使用\^{}Z查看能否让前台运行程序停止，并将控制权交给\texttt{ezsh}
+  \end{itemize}
+\end{enumerate}
+
+\begin{itemize}
+\item
+  使用\texttt{fg\ n}和\texttt{bg\ n} 查看\texttt{ezsh}
+  能否的正常在前后台切换程序
+
+  预测结果:
+
+  \begin{itemize}
+  \item
+    在\texttt{ezsh}中能够正常的前后台执行
+  \item
+    jobs功能正常
+  \item
+    使用\^{}Z能够让前台运行程序停止，并将控制权交给\texttt{ezsh}
+  \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\item
+  使用\texttt{fg\ n}和\texttt{bg\ n} 发现\texttt{ezsh}
+  能够正常的在前后台切换程序
+
+  测试结果:与预期一致
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item ~
+  \paragraph{输出重定向测试}\label{header-c80}
+
+  测试目的:验证是否能够通过使用\texttt{\textgreater{}}和\texttt{\textgreater{}\textgreater{}}符号达到输出重定向
+
+  测试方案:
+
+  \begin{itemize}
+  \item
+    在\texttt{ezsh}使用\texttt{\textgreater{}}测试输出重定向
+  \end{itemize}
+\end{enumerate}
+
+\begin{itemize}
+\item
+  在\texttt{ezsh}使用\texttt{\textgreater{}\textgreater{}}测试追加输出重定向
+
+  预测结果:\texttt{\textgreater{}}和\texttt{\textgreater{}\textgreater{}}分别能够实现输出重定向和追加输出重定向
+
+  测试结果:与预期一致
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item ~
+  \paragraph{输入重定向测试}\label{header-c99}
+
+  测试目的:验证是否能够通过使用\texttt{\textless{}}符号达到输入重定向
+
+  测试方案:在\texttt{ezsh}使用\texttt{\textless{}}测试输入重定向
+
+  预测结果:使用\texttt{\textless{}}能够实现输入重定向
+
+  测试结果:与预期一致
+\end{enumerate}
+
+\subsubsection{额外功能测试}\label{header-c108}
+
+postpone....
+
+\subsection{性能测试}\label{header-c111}
+
+NULL
+
+\end{document}

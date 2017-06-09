@@ -1,0 +1,114 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
+\usepackage[unicode=true]{hyperref}
+\hypersetup{
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\date{}
+
+\begin{document}
+
+\section{ezsh需求分析文档}\label{header-c5}
+
+\subsection{范围}\label{header-c7}
+
+本文档用于指导完成北京邮电大学《Unix环境高级编程》作业1``命令解释器shell''开发的过程。
+
+\subsection{总体需求}\label{header-c10}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  文档齐全(需求分析文档、详细设计文档、测试报告、总结报告、用户手册、README文档等)
+\item
+  所有要求的功能应能够实现
+\item
+  2017年6月18日00:00前完成
+\item
+  独立完成
+\end{enumerate}
+
+\subsection{开发需求}\label{header-c24}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  使用C语言完成，不允许使用其他语言
+\item
+  代码要求具有可读性
+\item
+  编写的程序鲁棒性要求高
+\end{enumerate}
+
+\subsection{功能需求}\label{header-c35}
+
+\subsubsection{简介}\label{header-c36}
+
+实现一个shell
+
+\subsubsection{功能需求}\label{header-c39}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  通过改变特定的环境变量达到更改命令提示符的功能
+\item
+  通过特殊的命令或者按键组合能够退出本程序
+\item
+  提供后台机制。
+\item
+  提供输出重定向
+\item
+  提供输入重定向
+\end{enumerate}
+
+\end{document}

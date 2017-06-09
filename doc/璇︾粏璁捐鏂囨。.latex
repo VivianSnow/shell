@@ -1,0 +1,578 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
+\usepackage[unicode=true]{hyperref}
+\hypersetup{
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\date{}
+
+\begin{document}
+
+\section{ezsh详细设计文档}\label{header-c5}
+
+\begin{quote}
+编写人：VivianSnow
+
+编写日期: 2017年5月4日
+
+第二次更新日期: 2017年5月22日
+
+第三次更新日期: 2017年6月7日
+\end{quote}
+
+\subsection{流程图及总体设计}\label{header-c16}
+
+\begin{figure}
+\centering
+\includegraphics{/Users/viviansnow/Downloads/docs/flow-chat.png}
+\caption{}
+\end{figure}
+
+\subsection{功能模块设计}\label{header-c19}
+
+\subsubsection{readline\_and\_history模块}\label{header-c20}
+
+\paragraph{模块描述}\label{header-c21}
+
+本模块主要用于从终端中读入以及历史的处理，主要用到了GNU lreadline库
+
+\paragraph{模块宏定义描述}\label{header-c24}
+
+无
+
+\paragraph{自定义数据结构描述}\label{header-c27}
+
+无
+
+\paragraph{模块接口}\label{header-c30}
+
+函数原型
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{char}\NormalTok{ *read_cmd_line();}
+\end{Highlighting}
+\end{Shaded}
+
+函数描述
+
+ 从终端中读入一行或多行，返回读入到的内容
+
+函数原型
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{char}\NormalTok{** get_cmd(}\DataTypeTok{char}\NormalTok{ *cmd_line);}
+\end{Highlighting}
+\end{Shaded}
+
+函数描述
+
+ 传入一个字符串，返回一个char**表示用\texttt{;}隔开的各个命令
+
+函数原型
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{void}\NormalTok{ init_history();}
+\end{Highlighting}
+\end{Shaded}
+
+函数描述
+
+ 初始化lreadline库中自带history功能。
+
+函数原型
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{void}\NormalTok{ history_command();}
+\end{Highlighting}
+\end{Shaded}
+
+函数描述
+
+ history命令实现
+
+函数原型
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{char}\NormalTok{* history_repeat(}\DataTypeTok{char}\NormalTok{ *cmd);}
+\end{Highlighting}
+\end{Shaded}
+
+函数描述
+
+ \texttt{Event\ Designators}功能的实现
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsubsection{job模块}\label{header-c67}
+
+\paragraph{模块描述}\label{header-c68}
+
+job模块主要负责shell中作业控制功能的实现
+
+\paragraph{模块宏定义描述}\label{header-c71}
+
+宏定义
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{#define MAXLINE (1024)}
+\PreprocessorTok{#define MAX_JOB (256)}
+
+\PreprocessorTok{#define JOB_RUNNING (0)}
+\PreprocessorTok{#define JOB_STOPED (1)}
+\PreprocessorTok{#define JOB_DONE (2)}
+\end{Highlighting}
+\end{Shaded}
+
+宏定义描述
+
+ \texttt{MAXLINE}表示一条command的最大长度
+
+ \texttt{MAX\_JOB}表示最多的作业数量
+
+ \texttt{JOB\_RUNNING},
+\texttt{JOB\_STOPED}和\texttt{JOB\_DONE}三个宏用来标记一个作业现在的状态
+
+\paragraph{自定义数据结构描述}\label{header-c83}
+
+自定义数据结构定义
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{struct}\NormalTok{ job \{}
+    \CommentTok{//In order to avoid problem cause by convert from unsigned to singed, we use int type}
+    \DataTypeTok{int}\NormalTok{ job_no; }\CommentTok{/* command no, used for messages */}
+    \DataTypeTok{char}\NormalTok{ job_cmd[MAXLINE]; }\CommentTok{/* command line, used for messages */}
+    \DataTypeTok{unsigned} \DataTypeTok{int}\NormalTok{ job_stat; }\CommentTok{/*job status, RUNING,STOPED or DONE */}
+\NormalTok{    pid_t job_pgid;         }\CommentTok{/* process group ID */}
+    \KeywordTok{struct}\NormalTok{ termios job_tmodes;      }\CommentTok{/* saved terminal modes */}
+\NormalTok{\};}
+\end{Highlighting}
+\end{Shaded}
+
+自定义数据结构描述
+
+
+结构体job用来保存一个作业的相关信息，\texttt{job\_no}表示作业的编号，\texttt{job\_cmd}表示作业的命令，\texttt{job\_stat}用来标记当前作业的状态，\texttt{job\_pgid}用来保存作业的process
+group ID，\texttt{job\_tmodes}用来保存当前作业的terminal modes
+
+自定义数据结构定义
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{struct}\NormalTok{ jobs\{}
+    \DataTypeTok{int}\NormalTok{ jobs_next_no;}
+    \DataTypeTok{int}\NormalTok{ jobs_alive_no;}
+    \KeywordTok{struct}\NormalTok{ job jobs_list[MAX_JOB*}\DecValTok{4}\NormalTok{];}
+\NormalTok{\};}
+\end{Highlighting}
+\end{Shaded}
+
+自定义数据结构描述
+
+
+结构体jobs用来shell中所有作业的相关信息，\texttt{job\_next\_no}表示下一个作业的编号，\texttt{jobs\_alive\_no}表示当前shell中活跃的作业数量，成员\texttt{jobs\_list}是一个结构体job的数组，用来保存每一个作业的信息。
+
+\paragraph{模块接口}\label{header-c98}
+
+函数原型
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{int}\NormalTok{ jobs_init();}
+\end{Highlighting}
+\end{Shaded}
+
+函数描述
+
+ 作业相关初始化。
+
+函数原型
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{int}\NormalTok{ add_jobs(pid_t pid, }\DataTypeTok{const} \DataTypeTok{char}\NormalTok{ *cmd);}
+\end{Highlighting}
+\end{Shaded}
+
+函数描述
+
+ 根据传入的pid和cmd，在jobs中更新并创建一个作业
+
+函数原型
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{int}\NormalTok{ add_jobs(pid_t pid, }\DataTypeTok{const} \DataTypeTok{char}\NormalTok{ *cmd);}
+\end{Highlighting}
+\end{Shaded}
+
+函数描述
+
+ 根据传入的pid和cmd，在jobs中更新并创建一个作业
+
+函数原型
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{void}\NormalTok{ refresh_all_job_status();}
+\end{Highlighting}
+\end{Shaded}
+
+函数描述
+
+ 更新所有作业的状态。
+
+函数原型
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{void}\NormalTok{ jobs_command();}
+\end{Highlighting}
+\end{Shaded}
+
+函数描述
+
+ jobs内置命令的实现
+
+函数原型
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{int}\NormalTok{ bg_command(}\DataTypeTok{const} \DataTypeTok{char}\NormalTok{* cmd);}
+\end{Highlighting}
+\end{Shaded}
+
+函数描述
+
+ bg命令的实现
+
+函数原型
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{int}\NormalTok{ fg_command(}\DataTypeTok{const} \DataTypeTok{char}\NormalTok{* cmd);}
+\end{Highlighting}
+\end{Shaded}
+
+函数描述
+
+ fg命令的实现
+
+函数原型
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{void}\NormalTok{ put_job_in_foreground(}\DataTypeTok{int}\NormalTok{ no);}
+\end{Highlighting}
+\end{Shaded}
+
+函数描述
+
+ 将作业编号为no的作业转入前台执行
+
+函数原型
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{void}\NormalTok{ put_job_in_background (}\DataTypeTok{int}\NormalTok{ no);}
+\end{Highlighting}
+\end{Shaded}
+
+函数描述
+
+ 将作业编号为no的作业在后台继续执行
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsubsection{export模块}\label{header-c163}
+
+\paragraph{模块描述}\label{header-c164}
+
+本模块主要实现export命令和shell prompt的相关处理。
+
+\paragraph{模块宏定义描述}\label{header-c167}
+
+无
+
+\paragraph{自定义数据结构描述}\label{header-c170}
+
+无
+
+\paragraph{模块接口}\label{header-c173}
+
+函数原型
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{int}\NormalTok{ export_command(}\DataTypeTok{const} \DataTypeTok{char}\NormalTok{ *cmd);}
+\end{Highlighting}
+\end{Shaded}
+
+函数描述
+
+ export内置命令的实现
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsubsection{utils模块}\label{header-c182}
+
+\paragraph{模块描述}\label{header-c183}
+
+对于程序中一些公用的工具函数，将其存放在utils模块下
+
+\paragraph{模块宏定义描述}\label{header-c186}
+
+宏定义
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{#define ISSPACE(x) ((x)==' '||(x)=='\textbackslash{}r'||(x)=='\textbackslash{}n'||(x)=='\textbackslash{}f'||(x)=='\textbackslash{}b'||(x)=='\textbackslash{}t')}
+\end{Highlighting}
+\end{Shaded}
+
+宏定义描述
+
+ 判断x是否为空字符
+
+\paragraph{自定义数据结构描述}\label{header-c194}
+
+无
+
+\paragraph{模块接口}\label{header-c197}
+
+函数原型
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{int}\NormalTok{ trim(}\DataTypeTok{char}\NormalTok{ *string);}
+\end{Highlighting}
+\end{Shaded}
+
+函数描述
+
+ 删去string前后的空字符
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsubsection{redirect模块}\label{header-c206}
+
+\paragraph{模块描述}\label{header-c207}
+
+redirect模块主要负责shell中输入命令重定向功能的实现
+
+\paragraph{模块宏定义描述}\label{header-c210}
+
+宏定义
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\PreprocessorTok{#define O_MY_ACCMODE (S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)}
+\PreprocessorTok{#define O_NORMALFLAG (O_WRONLY | O_CREAT | O_TRUNC)}
+\PreprocessorTok{#define O_APPENDFALG (O_WRONLY | O_CREAT | O_APPEND)}
+\end{Highlighting}
+\end{Shaded}
+
+宏定义描述
+
+ \texttt{O\_MY\_ACCMODE}表示默认的创建文件赋予的权限
+
+ \texttt{O\_NORMALFLAG}表示重定向时所用的open选项
+
+ \texttt{O\_APPENDFALG}表示追加重定向时所用的open选项
+
+\paragraph{自定义数据结构描述}\label{header-c222}
+
+自定义数据结构定义
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{struct}\NormalTok{ redirect_path \{}
+    \DataTypeTok{char}\NormalTok{ redirect_input_path[PATH_MAX];}
+    \DataTypeTok{char}\NormalTok{ redirect_output_path[PATH_MAX];}
+    \DataTypeTok{char}\NormalTok{ redirect_error_path[PATH_MAX];}
+
+    \CommentTok{/*bit fields should more efficient and readable than mask and bitwise*/}
+    \DataTypeTok{unsigned} \DataTypeTok{int}\NormalTok{ redirect_input_append : }\DecValTok{1}\NormalTok{;}
+    \DataTypeTok{unsigned} \DataTypeTok{int}\NormalTok{ redirect_output_append : }\DecValTok{1}\NormalTok{;}
+    \DataTypeTok{unsigned} \DataTypeTok{int}\NormalTok{ redirect_error_append : }\DecValTok{1}\NormalTok{;}
+
+\NormalTok{\};}
+\end{Highlighting}
+\end{Shaded}
+
+自定义数据结构描述
+
+
+redirect\_path结构体用于保存重定向路径名及是否追加选项等，如果\texttt{redirect\_input\_path},
+\texttt{redirect\_output\_path}和\texttt{redirect\_error\_path}不为空，则表示有重定向，否则表示没有重定向
+
+\paragraph{模块接口}\label{header-c230}
+
+函数原型
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{int}\NormalTok{ find_redirect_symbol(}\DataTypeTok{char}\NormalTok{ *buf, }\KeywordTok{struct}\NormalTok{ redirect_path *redirect_path_ptr);}
+\end{Highlighting}
+\end{Shaded}
+
+函数描述
+
+
+找到传入的buf中的重定向，并将路径和追加重定向flag存入redirect\_path\_ptr中
+
+函数原型
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{void}\NormalTok{ redirect(}\KeywordTok{struct}\NormalTok{ redirect_path *redirect_path_ptr);}
+\end{Highlighting}
+\end{Shaded}
+
+函数描述
+
+ 根据redirect\_path\_ptr中的选项进行对当前的进程进行重定向
+
+\subsubsection{信号处理模块}\label{header-c245}
+
+\paragraph{模块描述}\label{header-c246}
+
+本模块主要用于处理各作业和shell中信号相关的处理
+
+\paragraph{模块宏定义描述}\label{header-c249}
+
+无
+
+\paragraph{自定义数据结构描述}\label{header-c252}
+
+无
+
+\paragraph{模块接口}\label{header-c255}
+
+函数原型
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{void}\NormalTok{ shell_signal_init();}
+\end{Highlighting}
+\end{Shaded}
+
+函数描述
+
+ shell信号初始化。
+
+函数原型
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{void}\NormalTok{ job_signal_init();}
+\end{Highlighting}
+\end{Shaded}
+
+函数描述
+
+ 作业信号初始化
+
+\end{document}

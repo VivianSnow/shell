@@ -1,0 +1,421 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
+\usepackage[unicode=true]{hyperref}
+\hypersetup{
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\date{}
+
+\begin{document}
+
+\section{ezsh User's Guide}\label{header-c5}
+
+\tableofcontents
+
+\subsection{Introduction}\label{header-c8}
+
+ezsh means easy shell. Our goal is make shell use easy.
+
+This manual assumes that ezsh has already been installed and ready to
+use. For instructions on how to build and install ezsh, see the ezsh
+Installer's Guide below, or the README in the top-level ezsh directory.
+This manual explains how to use ezsh and some detail of ezsh. This is a
+preliminary version and some sections are not complete yet. However,
+there should be enough here to get you started with ezsh.
+
+\subsection{Require and Build}\label{header-c13}
+
+\subsubsection{Require}\label{header-c14}
+
+\href{http://cnswww.cns.cwru.edu/php/chet/readline/rltop.html}{The GNU
+Readline Library}
+
+If you are using a Ubuntu or Debian OS, just use following command to
+install
+
+\begin{verbatim}
+apt-get install libreadline-dev
+\end{verbatim}
+
+\subsubsection{Build}\label{header-c20}
+
+To build the code successfully, do the following:
+
+\begin{verbatim}
+./configure
+./make
+./make install
+\end{verbatim}
+
+\subsection{Tutorial}\label{header-c24}
+
+\subsubsection{Learning ezsh}\label{header-c25}
+
+This tutorial assumes a basic understanding of command line shells and
+Unix commands, and that you have a working copy of \texttt{ezsh}.
+
+When you start \texttt{ezsh}, you should see this:
+
+\begin{verbatim}
+Note: Welcome to ezsh!
+shell>
+\end{verbatim}
+
+\subsubsection{Running Commands}\label{header-c31}
+
+\texttt{ezsh} runs commands like other shells: you type a command,
+followed by its arguments. Spaces are separators:
+
+\begin{verbatim}
+> echo hello world
+hello world
+\end{verbatim}
+
+You can write multiple command in a line and separate with \texttt{;} ,
+following usage are allowed in \texttt{ezsh} :\\
+
+\begin{verbatim}
+ls; ls -l    ; echo "Hello World"
+\end{verbatim}
+
+as we can see, extra spaces will not obstruct identify.
+
+You can use \emph{Escape symbol \texttt{\textbackslash{}}} at the end of
+a line to concat two lines, below input
+
+\begin{verbatim}
+ls -\
+l\
+-rt
+\end{verbatim}
+
+are equal to
+
+\begin{verbatim}
+ls -l -rt
+\end{verbatim}
+
+\subsubsection{Exit ezsh}\label{header-c46}
+
+There server ways to exit ezsh:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  combination key:
+
+  If you are using linux or cgwin in Windows, \texttt{\^{}D} should
+  worked.
+
+  If you are a mac user, try \texttt{command+D} or \texttt{\^{}D} ? (no
+  test) 
+\item
+  builtin command \texttt{exit}
+
+  builtin command \texttt{exit} will ignore uppercase or lowercase, thus
+  \texttt{exit} , \texttt{EXIT} and \texttt{ExIt} or worked
+\end{enumerate}
+
+\subsubsection{Wildcards}\label{header-c62}
+
+\texttt{ezsh} supports the familiar wildcard \texttt{*}. To list all
+JPEG files:
+
+\begin{verbatim}
+> ls *.jpg
+lena.jpg
+meena.jpg
+santa maria.jpg
+\end{verbatim}
+
+\subsubsection{Pipes and Redirections}\label{header-c66}
+
+Pipes between commands with the usual vertical bar are not supported
+now, I will add this function ASAP.
+
+stdin and stdout can be redirected via the familiar\texttt{\textless{}}
+and\texttt{\textgreater{}}. Unlike other shells, in order to make
+realize easy, stderr is redirected with a caret \texttt{\^{}}
+
+\begin{verbatim}
+grep "Hello world" < intput.txt > ~/output.txt ^ ~/errors.txt
+\end{verbatim}
+
+If you want to redirect and append, just use those symbol twice
+\texttt{\textgreater{}\textgreater{}} and \texttt{\^{}\^{}}
+
+\begin{quote}
+Note: if you use same redirection symbol multi-times, only the first one
+will worked.
+
+For example, if you input command like this:
+
+\begin{verbatim}
+./a.out > output1.txt > output2.txt
+\end{verbatim}
+
+The stdout of a.out will only redirect to output1.txt
+\end{quote}
+
+\subsubsection{Tab Completions}\label{header-c82}
+
+Press \textbf{Tab}, and \texttt{ezsh} will attempt to complete the
+command or path:
+
+\begin{verbatim}
+> /pri @key{Tab} → /private/
+\end{verbatim}
+
+\begin{quote}
+Note: ezsh builtin command are not support tab completions now, I will
+try to fix this next edition.
+\end{quote}
+
+\subsubsection{Command History}\label{header-c89}
+
+In order to show and manipulate command history, ezsh proived
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Builtin command \texttt{history}
+
+  Builtin command \texttt{history} will show the command histroy. ezsh
+  will not save history file if shell was terminated.
+
+\begin{verbatim}
+shell>history
+history
+1: ls
+2: echo Hello, World
+3: ls -lt
+4: history
+\end{verbatim}
+\item
+  Event Designators
+
+  An event designator is a reference to a command line entry in the
+  history list. Unless the reference is absolute, events are relative to
+  the current position in the history list.
+
+  \texttt{!n}
+
+   Refer to command line n.
+
+  \texttt{!-n}
+
+   Refer to the command n lines back.
+\item
+  Scroll History
+
+  You and use \texttt{↑} and \texttt{↓} on keyboard to scroll history. 
+\end{enumerate}
+
+\subsubsection{Exports(Shell Variables)}\label{header-c117}
+
+Like most of shells, ezsh uses \texttt{export}command to export shell
+variables.But the usuage of \texttt{export} command are different.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  If you want to assign a variables, you can use like
+
+\begin{verbatim}
+export PREFIX = "My shell"
+\end{verbatim}
+
+  or
+
+\begin{verbatim}
+export PREFIX --assign "My shell"
+\end{verbatim}
+\item
+  If you want to add some thing to a variables, you can use like this:
+
+\begin{verbatim}
+export PATH += ":/home/"
+\end{verbatim}
+
+  or
+
+\begin{verbatim}
+export PATH --append ":/home/"
+\end{verbatim}
+
+  \begin{quote}
+  Hint: you should add ':' manually, or will cause fatal error
+  \end{quote}
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  If you want to remove a variables, you can use like this:
+
+\begin{verbatim}
+export PATH -d
+\end{verbatim}
+
+  or
+
+\begin{verbatim}
+export PATH --delete
+\end{verbatim}
+\end{enumerate}
+
+\begin{quote}
+Please use spaces as separators, or undefined operation may happend.
+\end{quote}
+
+\subsubsection{Shell Prompt}\label{header-c149}
+
+As default, \texttt{ezsh} will output \texttt{shell\textgreater{}}to
+terminal. If you want to change the shell prompt.
+
+Just manipulate PROMPT variables in ezsh. You can change the shell
+prompt with your favor like this:
+
+\begin{verbatim}
+export PROMPT = "VivianSnow's Shell"
+\end{verbatim}
+
+\begin{quote}
+BE CAREFUL, \texttt{PROMPT} variable's spell are all upper case
+\end{quote}
+
+\subsubsection{Job control}\label{header-c158}
+
+ezsh will create a job for every command and ezsh also support job
+control.
+
+If you want a command run on the background, just add \texttt{\&} at end
+of the command. You can use like this,
+
+\begin{verbatim}
+shell>./a.out &
+\end{verbatim}
+
+\begin{quote}
+\texttt{\&}symbol must at the end of command, or ezsh can't detect it.
+\end{quote}
+
+Like most of shells that support job control, you can use \texttt{jobs}
+builtin coomand to list the jobs and there's status.
+
+The following two builtin command are used to control jobs run between
+foreground and background.
+
+\texttt{fg\ n}
+
+ The jobs that number equal to n will divert into foreground. If job is
+stoped, \texttt{ezsh} will sent SIGCONT to it.
+
+\texttt{bg\ n}
+
+ The jobs that number equal to n will divert into foreground. If job is
+stoped, \texttt{ezsh} will sent SIGCONT to it.
+
+\subsection{Builtin Command}\label{header-c179}
+
+I have add some builtin command now, including
+
+\texttt{exit}
+
+ exit ezsh, see Exit ezsh part above
+
+\texttt{!}
+
+ see Command History part above
+
+\texttt{export}
+
+ see Exports(Shell Variables) above
+
+\texttt{cd}
+
+ I design it, but now it was just a empty command.
+
+\texttt{source}
+
+ I design it, but now it was just a empty command. In fact, I have no
+idea how to run a script now, thus I will finish this command after
+study more.
+
+\texttt{fg}
+
+ see Job control part above
+
+\texttt{bg}
+
+ see Job control part above
+
+\texttt{jobs}
+
+ see Job control part above
+
+\texttt{history}
+
+ see Command History part above
+
+More builtin command will be added in next edition.
+
+\subsection{Author and Bug Report}\label{header-c220}
+
+I'm a Master Candidate of Beijing Uninveristry of Posts and
+Telecommunication.ezsh is practice project after reading APUE and
+learning APUE lecture which instructed by hoplee(hoplee\#bupt.edu.cn).
+
+If you have any good idea or meet any bugs, please contact me at
+\href{mailto:viviansnow@bupt.edu.cn}{\nolinkurl{viviansnow@bupt.edu.cn}}
+
+\end{document}
